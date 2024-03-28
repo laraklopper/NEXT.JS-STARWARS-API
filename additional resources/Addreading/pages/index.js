@@ -2,7 +2,7 @@
 import Layout from '../components/Layout';
 import getPhotos from '../data/data.js'
 import Photo from '../components/Photo';
-import React, { Component } from 'react'
+import React, { Component } from 'react';
 
 /* We get data into props in getInitialProps below. All that data is then available through the props.
 We loop through each image and render a Photo component. We create that component at ./components/Photo.js. */
