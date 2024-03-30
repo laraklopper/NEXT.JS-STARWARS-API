@@ -3,13 +3,13 @@
 Since Next.js is used to create server-rendered pages, adding a link using a normal <a> tag would cause a link that would be navigated to via the server. 
 This is obviously not always necessary. 
 To support client-side navigation (this takes place in the browser, without making a request to the server) we use Next.js’ Link API.*/
-import Link from 'next/link'
+import Link from 'next/link'//Import the Link component from Next.js to create links between pages
 //You can use this built-in component to append elements to the <head> element of the page. More info here: https://github.com/zeit/next.js/#populating-head 
-import Head from 'next/head'
+import Head from 'next/head'// Import Head component from Next.js for managing <head> of the document
 
 
 /* 
-In the example belwo pay attention to these two important things: the props passpsed through to this component and how we style this components. 
+In the example below pay attention to these two important things: the props passpsed through to this component and how we style this components. 
 ====Props====
 Notice in the example below that we pass children and title as props to the Layout components.
 If you remove {children}, the Layout cannot render the content we put inside the Layout element. 
@@ -29,6 +29,7 @@ export default ({ children, title = 'This is the default title' }) => (
     <div>
         <Head>
         <title>{ title }</title>
+        {/* Set character encoding and viewport for better mobile responsiveness */}
         <meta charSet='utf-8' />
         <meta name='viewport' content='initial-scale=1.0, width=device-width' />
         </Head>
