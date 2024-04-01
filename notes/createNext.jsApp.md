@@ -38,4 +38,4 @@
     npm run dev
     ```
 
-10. Then open http://localhost:3000. (alt + click)
+10. Then open `http://localhost:3000`. (alt + click)
