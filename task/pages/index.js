@@ -1,5 +1,5 @@
-import Layout from "../components/Layout";
-import fetch from 'isomorphic-unfetch'
+import Layout from "../components/Layout";//Import Layout component
+import fetch from 'isomorphic-unfetch'; Import Fetch from isomorphic-unfetch
 
 //Index Page
 function Home({ data }) {
