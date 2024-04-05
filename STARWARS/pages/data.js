@@ -1,31 +1,38 @@
-import Layout from '../components/Layout';
+import Layout from '../components/Layout';//Import the Layout function component
 
+// Data component
 function Data({ film }) {
    
-
+    // If film data is not available, display a loading message using the Layout component
     if (!film) return <Layout><p>Loading...</p></Layout>;
 
+   //Log film details in the console for debugging purposes
     console.log(film.title);
     console.log(film.director);
     console.log(film.producer);
     console.log(film.release_date);
 
-    
+    //============JSX RENDERING==============
+   
     return (
         <Layout>
             <div className='apiDetails'>
                 <section id='section1'>
+       {/* Heading row */}
                     <div className='headingRow'>
                         <div className='headingCol'>
+       {/* Display film title */}
                             <h2 className='h2'>{film.title}</h2>
                         </div>
                     </div>
+       {/* Output rows */}
                     <div className='outputRow'>
                         <div className='outputCol'>
-                            
+                             {/* Display director */}
                             <label className='dataLabel'>DIRECTOR:</label>
                             <p className='dataDetail'>{film.director}</p>
                         </div>
+                        {/* Display producer */}
                    <div className='outputCol'>
                             <label className='dataLabel'>PRODUCER:</label>
                             <p className='dataDetail'>{film.producer}</p>
@@ -33,10 +40,11 @@ function Data({ film }) {
                     </div>
                     <div className='outputRow'>
                         <div className='outputCol'>
+                            {/* Display release date */}
                             <label className='dataLabel'>RELEASE DATE:</label>
                             <p className='dataDetail'>{film.release_date}</p>
                         </div>
-
+                        {/* Display opening crawl */}
                         <div className='outputCol'>
                             <label className='dataLabel'>OPENING CRAWL:</label>
                                 <p className='crawlData'> {film.opening_crawl}</p>
@@ -45,6 +53,8 @@ function Data({ film }) {
                  
                 </section>
             </div>
+               {/* Styling using CSS-in-JS */}
+
             <style>
                 {`
                 #section1{
@@ -104,20 +114,25 @@ function Data({ film }) {
     );
 }
 
+// Asynchronous function to fetch film data based on the ID provided in the query parameters
 export async function getServerSideProps(context) {
     const { id } = context.query;
     try {
+               // Fetch film data from the SWAPI API based on the ID
         const response = await fetch(`https://swapi.dev/api/films/${id}`);
-        const film = await response.json();
-        return {
+        const film = await response.json(); // Parse the response as JSON
+        return {//Return the film data props
             props: { film },
         };
     } catch (error) {
-        console.error('Failed to fetch film data', error);
+       //Handle errors
+        console.error('Failed to fetch film data', error);//Log an error message in the console for debugging purpose
+       // Return null as film data props
         return {
             props: { film: null }, 
         };
     }
 }
 
-export default Data;
+export default Data;// Export the Data component as default
+
