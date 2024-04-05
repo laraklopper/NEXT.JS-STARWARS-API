@@ -26,8 +26,6 @@ function Home({ data }) {
         }
     };
 
-
-
     //==============JSX RENDERING=================
 
     return (
@@ -55,7 +53,12 @@ function Home({ data }) {
                                     {films.map((film, index) => (
                                         <li key={index} className="data">
                                             <div className="dataOutput">
-                                                {/* Link to navigate to the details page to display individual film details */}
+                                                {/* Create a link to navigate to the details page to display individual 
+                                                film details. 
+                                                `<Link href={/data?id=${index}} className="dataItem">`: Creates a link that 
+                                                when clicked navigates to the page specified in the `href` attribute.The ${index} part is used 
+                                                to dynamically generate the URL with the id query parameter set to the value of the index variable.
+                                                This allows for dynamic routing based on the index of the film in the array.*/}
                                                 <Link href={`/data?id=${index}`} className="dataItem">
                                                     <p className="itemText">{film.title}</p>
                                                 </Link>
@@ -75,6 +78,7 @@ function Home({ data }) {
             {/* Styling using CSS-in-JS */}
             <style jsx>
                 {`
+                //Section 1
                 #section1{
                  margin-top: 10px;
                 margin-bottom:5px;
@@ -83,6 +87,7 @@ function Home({ data }) {
                 padding: 10px;
                  background-color: #A3A3A3;
                 }
+                //heading
                 #heading{
                     display:flex;
                     width: 100%;                   
@@ -94,24 +99,8 @@ function Home({ data }) {
                     display: flex;
                     width:100%;
                 }
-                // Data row
-                .dataRow{
-                    display: flex;
-                    width:100%;
-                    padding:10px;
-                    
-                }
-                .itemText{
-                    color:white;
-                    font-weight: bold;
-                    padding-top: 0px;
-                    padding-left: 5px;
-                    padding-bottom: 0px
-                    padding-right: 7px;
-                    display:flex;
-                    margin: 5px;
-                    width:100%;
-                }
+             
+                //Button
                 #btnCol{
                     width:20%;
                     display: flex;
@@ -132,6 +121,24 @@ function Home({ data }) {
                     color:#F5F5F5;
         
                         
+                }
+                   // Data 
+                .dataRow{
+                    display: flex;
+                    width:100%;
+                    padding:10px;
+                    
+                }
+                .itemText{
+                    color:white;
+                    font-weight: bold;
+                    padding-top: 0px;
+                    padding-left: 5px;
+                    padding-bottom: 0px
+                    padding-right: 7px;
+                    display:flex;
+                    margin: 5px;
+                    width:100%;
                 }
                 .apiOutput{
                     width:100%;
@@ -171,6 +178,7 @@ function Home({ data }) {
                     display: flex;
                     padding:10px;
                 }
+                //Error message
                 #errorMessage{
                     font-weight: bold;
                     color:#32383e;
@@ -187,14 +195,14 @@ export async function getServerSideProps() {
     try {
         // Fetch film data from SWAPI (Star Wars) API
         const response = await fetch("https://swapi.dev/api/films");
-        const data = await response.json();
+        const data = await response.json();//Parse the response data as JSON
         // Return the fetched data as props
         return {
             props: { data: data.results },     
 
         };
     } catch (error) {
-        console.error('Failed to fetch film data', error);
+        console.error('Failed to fetch film data', error);//Log an error message in the console for debugging purposes
         return {
             // Return an empty array as props in case of error
             props: { data: [] },
