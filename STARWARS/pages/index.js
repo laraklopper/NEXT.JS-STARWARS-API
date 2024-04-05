@@ -3,33 +3,29 @@ import Layout from "../components/Layout";
 import fetch from "isomorphic-unfetch";
 import Link from "next/link";
 
-
 function Home({ data }) {
-    //State variables
     const [films, setFilms] = useState(data);
-    const [display, setDisplay] = useState(false)
+    const [loading, setLoading] = useState(false);
     const [error, setError] = useState(null);
 
-    //Function to fetch data from Api
     const fetchFilmData = async () => {
+        setLoading(true);
         try {
             const response = await fetch('https://swapi.dev/api/films');
             const newData = await response.json();
             setFilms(newData.results);
-            setDisplay(true)
         } catch (error) {
-            console.error('Failed to Film data', error);
-            setError('Failed to fetch filmData'. error)
+            console.error('Failed to fetch film data', error);
+            setError('Failed to fetch Film data', error.message)
+        } finally {
+            setLoading(false);
         }
     };
 
-    
-
-    //=================JSX RENDERING==========================
     return (
         <Layout>
             <div>
-                <section>
+                <section className="section1">
                     <div className="row">
                         <div className="col">
                             <button className="apiButton" type="button" onClick={fetchFilmData}>
@@ -37,14 +33,18 @@ function Home({ data }) {
                             </button>
                         </div>
                     </div>
-                    <div>
-                        <div>
-                            <h2 className="h2">DATA</h2>
+                </section>
+            <section className="section2">
+                    <div className="row">
+                        <div className="col">
+                            <h2 className="h2">FILM DATA</h2>
                         </div>
                     </div>
                     <div className="row">
                         <div className="col">
-                            {display && films && films.length > 0 ? (
+                            {loading ? (
+                                <p>Loading...</p>
+                            ) : films && films.length > 0 ? (
                                 <ul>
                                     {films.map((film, index) => (
                                         <li key={index}>
@@ -57,7 +57,7 @@ function Home({ data }) {
                                     ))}
                                 </ul>
                             ) : (
-                                 <p>{error ? error : "No data available"}</p>
+                                <p>{error ? error : "No data available"}</p>
                             )}
                         </div>
                     </div>
@@ -66,6 +66,7 @@ function Home({ data }) {
         </Layout>
     );
 }
+
 export async function getServerSideProps() {
     try {
         const response = await fetch("https://swapi.dev/api/films");
