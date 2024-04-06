@@ -1,7 +1,8 @@
-import Head from 'next/head';
-import Link from 'next/link';
-// import React from 'react';
+// Importing necessary dependencies from Next.js
+import Head from 'next/head'; // Import Head component from Next.js for managing document head elements
+import Link from 'next/link'; // Import Link component from Next.js for client-side navigation
 
+//Define the Layout component
 const Layout = ({ children, title }) => {
     return (
         <div>
@@ -10,6 +11,7 @@ const Layout = ({ children, title }) => {
                 <meta charSet="utf-8" />
                 <meta name="viewport" content="initial-scale=1.0, width=device-width" />
             </Head>
+        {/* Header*/}
             <header id='header'>
                 <div className='row'>
                     <div className='col'>
@@ -18,6 +20,7 @@ const Layout = ({ children, title }) => {
                 </div>
                 <div className='row'>
                     <div className='col'>
+                        {/* Navigation bar */}
                         <ul id='navbar'>
                             <li className='link'>
                                 <Link href="/" className='pageLink'>
@@ -33,7 +36,9 @@ const Layout = ({ children, title }) => {
                     </div>
                 </div>
             </header>
+            {/* Content area */}
             <div>{children}</div>
+                {/* Global JSX Styling */}
           <style global jsx>
             {`
             body{
@@ -80,12 +85,10 @@ const Layout = ({ children, title }) => {
                 padding:5px;
                 color:white
             }
-
-
             `}
           </style>
         </div>
     );
 };
 
-export default Layout;
+export default Layout;//Export Layout function component
