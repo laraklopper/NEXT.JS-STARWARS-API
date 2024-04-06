@@ -15,9 +15,9 @@ function Home({ data }) {
     //Funtion to fetch film data
      const fetchFilmData = async () => {
         try {
-            // Fetch film data from the SWAPI API
-            const response = await fetch('https://swapi.dev/api/films');// Parse the response to JSON
-            const newData = await response.json();
+            // Fetch film data from the SWAPI (Star Wars) API
+            const response = await fetch('https://swapi.dev/api/films');
+            const newData = await response.json();// Parse the response to JSON
             setFilms(newData.results);//Update the films state to show fetched data
             setDisplay(true);// Set display state to true to show the fetched data
         } catch (error) {
