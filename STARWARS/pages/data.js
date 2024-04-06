@@ -1,16 +1,16 @@
 import Layout from '../components/Layout';//Import the Layout function component
 
-// Data component
+// Define Data component
 function Data({ film }) {
    
     // If film data is not available, display a loading message using the Layout component
     if (!film) return <Layout><p>Loading...</p></Layout>;
 
    //Log film details in the console for debugging purposes
-    console.log(film.title);
-    console.log(film.director);
-    console.log(film.producer);
-    console.log(film.release_date);
+    console.log(film.title);//Log the film title in the console for debugging purposes
+    console.log(film.director);//Log the director in the console for debugging purposes
+    console.log(film.producer);//Log the film producer in the console for debugging purposes
+    console.log(film.release_date);//Log the release date in the console for debugging purposes
 
     //============JSX RENDERING==============
    
@@ -18,14 +18,14 @@ function Data({ film }) {
         <Layout>
             <div className='apiDetails'>
                 <section id='section1'>
-       {/* Heading row */}
+                {/* Heading row */}
                     <div className='headingRow'>
                         <div className='headingCol'>
-       {/* Display film title */}
+                {/* Display film title */}
                             <h2 className='h2'>{film.title}</h2>
                         </div>
                     </div>
-       {/* Output rows */}
+                {/* Output rows */}
                     <div className='outputRow'>
                         <div className='outputCol'>
                              {/* Display director */}
@@ -114,20 +114,20 @@ function Data({ film }) {
     );
 }
 
-// Asynchronous function to fetch film data based on the ID provided in the query parameters
+// Function to fetch film data based on the ID
 export async function getServerSideProps(context) {
-    const { id } = context.query;
+    const { id } = context.query;// Extract the 'id' property from the 'context.query' object using object destructuring
     try {
-               // Fetch film data from the SWAPI API based on the ID
+         // Fetch film data from the SWAPI API (Star Wars) based on the ID
         const response = await fetch(`https://swapi.dev/api/films/${id}`);
         const film = await response.json(); // Parse the response as JSON
         return {//Return the film data props
             props: { film },
         };
     } catch (error) {
-       //Handle errors
-        console.error('Failed to fetch film data', error);//Log an error message in the console for debugging purpose
-       // Return null as film data props
+       // Handle errors if fetching data fails
+        console.error('Failed to fetch film data', error);//Log an error message in the console for debugging purposes
+       // Return null as film data if an error occurs
         return {
             props: { film: null }, 
         };
