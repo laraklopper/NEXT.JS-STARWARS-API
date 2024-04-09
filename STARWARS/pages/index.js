@@ -55,7 +55,7 @@ function Home({ data }) {
                                             <div className="dataOutput">
                                                 {/* Create a link to navigate to the details page to display individual 
                                                 film details. 
-                                                `<Link href={/data?id=${index}} className="dataItem">`: Creates a link that 
+                                                `<Link href={/data?id=${index+1}} className="dataItem">`: Creates a link that 
                                                 when clicked navigates to the page specified in the `href` attribute.The ${index} part is used 
                                                 to dynamically generate the URL with the id query parameter set to the value of the index variable.
                                                 This allows for dynamic routing based on the index of the film in the array.*/}
