@@ -1,2 +1,5 @@
-# Learning-task-12
+# STARWARS API
 NEXT.JS 2
+
+Starwars API built using NEXT.js
+
